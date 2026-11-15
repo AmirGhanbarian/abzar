@@ -3,23 +3,23 @@ import { Headphones, ShieldCheck, Truck, Zap } from 'lucide-react'
 const props = [
   {
     icon: Zap,
-    title: 'Brushless by default',
-    body: 'Every Abzar tool runs a brushless motor — more runtime, longer life, and consistent power under load.',
+    title: 'براشلس به‌طور پیش‌فرض',
+    body: 'هر ابزار ابزار با موتور براشلس کار می‌کند — زمان اجرای بیشتر، عمر طولانی‌تر و توان یکنواخت زیر بار.',
   },
   {
     icon: ShieldCheck,
-    title: '3-year warranty',
-    body: 'Each tool is covered for three years against defects, with a 1-year battery warranty and easy online claims.',
+    title: 'گارانتی ۳ ساله',
+    body: 'هر ابزار سه سال در برابر نقص گارانتی می‌شود، با گارانتی ۱ ساله باتری و ادعای آنلاین آسان.',
   },
   {
     icon: Truck,
-    title: 'Fast, free shipping',
-    body: 'Orders over $99 ship free in two business days. Need it on the job tomorrow? Order by 3pm for next-day dispatch.',
+    title: 'ارسال سریع و رایگان',
+    body: 'سفارش‌های بالا در دو روز کاری رایگان ارسال می‌شوند. برای فردای کارگاه لازمش دارید؟ تا ساعت ۱۵ سفارش بدهید تا فردا ارسال شود.',
   },
   {
     icon: Headphones,
-    title: 'Jobsite support',
-    body: 'Real technicians answer the line Monday–Saturday — parts diagrams, repair booking, and tool advice when you need it.',
+    title: 'پشتیبانی کارگاهی',
+    body: 'تکنسین‌های واقعی شنبه تا پنجشنبه تلفن را جواب می‌دهند — نقشه قطعات، رزرو تعمیر و مشاوره ابزار هر زمان لازم باشد.',
   },
 ]
 
@@ -28,13 +28,14 @@ export function ValueProps() {
     <section id="why" className="border-y border-white/5 bg-ink-900/60">
       <div className="container-page py-14 sm:py-20">
         <div className="mx-auto max-w-2xl text-center">
-          <span className="eyebrow">Why Abzar</span>
+          <span className="eyebrow">چرا ابزار</span>
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Tools engineered to outlast the job
+            ابزارهایی ساخته‌شده برای دوام بیش از کار
           </h2>
           <p className="mt-4 text-slate-400">
-            We obsess over the details that show up after the first hundred cuts
-            — motor life, chuck grip, fence trueness — so your kit keeps earning.
+            ما روی جزئیاتی که پس از صد برش اول آشکار می‌شوند وسواس داریم — عمر
+            موتور، چسبندگی سه‌نظام، تراز فلز راهنما — تا کیت شما به درآمدن ادامه
+            دهد.
           </p>
         </div>
 

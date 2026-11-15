@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom'
 import { Menu, Search, ShoppingBag, X, Zap } from 'lucide-react'
 import { useCart } from '../hooks/useCart'
 import { useUI } from '../hooks/useUI'
+import { formatPrice } from '../data/products'
+
+/** سقف ارسال رایگان (به دلار) — در نوار اعلان با formatPrice به تومان نمایش داده می‌شود. */
+const FREE_SHIPPING_USD = 99
 
 const nav = [
-  { label: 'Shop', to: '/shop' },
-  { label: 'Categories', to: '/#categories' },
-  { label: 'Deals', to: '/shop?deal=1' },
-  { label: 'Why Abzar', to: '/#why' },
+  { label: 'فروشگاه', to: '/shop' },
+  { label: 'دسته‌بندی‌ها', to: '/#categories' },
+  { label: 'تخفیف‌ها', to: '/shop?deal=1' },
+  { label: 'چرا ابزار', to: '/#why' },
 ]
 
 export function Header() {
@@ -16,8 +20,8 @@ export function Header() {
   const { openSearch } = useUI()
   const [open, setOpen] = useState(false)
 
-  // Global shortcuts: ⌘/Ctrl+K or "/" opens the search palette. "/" is ignored
-  // while the user is typing in an input or textarea.
+  // میانبرهای سراسری: ⌘/Ctrl+K یا «/» پنل جستجو را باز می‌کند. «/» هنگام
+  // تایپ در ورودی یا ناحیه‌متن نادیده گرفته می‌شود.
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
@@ -40,20 +44,20 @@ export function Header() {
 
   return (
     <>
-      {/* Announcement bar */}
+      {/* نوار اعلان */}
       <div className="bg-brand-amber text-ink-950">
-        <div className="container-page flex h-9 items-center justify-center gap-2 text-center text-[11px] font-semibold uppercase tracking-wide sm:text-xs">
-          <span>Free shipping over $99</span>
+        <div className="container-page flex h-9 items-center justify-center gap-2 text-center text-[11px] font-semibold sm:text-xs">
+          <span>ارسال رایگان از {formatPrice(FREE_SHIPPING_USD)}</span>
           <span className="opacity-40">•</span>
-          <span>3-year warranty</span>
+          <span>گارانتی ۳ ساله</span>
           <span className="hidden opacity-40 sm:inline">•</span>
-          <span className="hidden sm:inline">30-day returns</span>
+          <span className="hidden sm:inline">۳۰ روز مهلت بازگشت</span>
         </div>
       </div>
 
       <header className="sticky top-0 z-40 border-b border-white/10 bg-ink-950/80 backdrop-blur-lg">
         <div className="container-page flex h-16 items-center justify-between gap-4">
-          {/* Logo */}
+          {/* لوگو */}
           <Link to="/" className="flex items-center gap-2">
             <span className="grid h-9 w-9 place-items-center rounded-lg bg-brand-amber text-ink-950">
               <Zap className="h-5 w-5" fill="currentColor" />
@@ -63,7 +67,7 @@ export function Header() {
             </span>
           </Link>
 
-          {/* Desktop nav */}
+          {/* ناوبری دسکتاپ */}
           <nav className="hidden items-center gap-8 md:flex">
             {nav.map((n) => (
               <Link
@@ -76,26 +80,26 @@ export function Header() {
             ))}
           </nav>
 
-          {/* Actions */}
+          {/* اکشن‌ها */}
           <div className="flex items-center gap-1 sm:gap-2">
-            {/* Search trigger — desktop pill with shortcut hint */}
+            {/* دکمه جستجو — قرص دسکتاپ با راهنمای میانبر */}
             <button
               onClick={openSearch}
               className="hidden items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-2.5 py-2 text-slate-400 transition hover:border-white/25 hover:text-white md:flex"
-              aria-label="Search products"
+              aria-label="جستجوی محصولات"
             >
               <Search className="h-4 w-4" />
-              <span className="text-xs">Search…</span>
+              <span className="text-xs">جستجو…</span>
               <kbd className="rounded bg-white/10 px-1.5 py-0.5 text-[10px] font-semibold text-slate-300">
                 ⌘K
               </kbd>
             </button>
 
-            {/* Search trigger — mobile icon */}
+            {/* دکمه جستجو — آیکن موبایل */}
             <button
               onClick={openSearch}
               className="tap rounded-lg p-2 text-slate-300 transition hover:bg-white/10 hover:text-white md:hidden"
-              aria-label="Search products"
+              aria-label="جستجوی محصولات"
             >
               <Search className="h-5 w-5" />
             </button>
@@ -103,11 +107,11 @@ export function Header() {
             <button
               onClick={openCart}
               className="tap relative rounded-lg p-2 text-slate-300 transition hover:bg-white/10 hover:text-white"
-              aria-label={`Open cart, ${count} items`}
+              aria-label={`باز کردن سبد، ${count} کالا`}
             >
               <ShoppingBag className="h-5 w-5" />
               {count > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-[20px] place-items-center rounded-full bg-brand-amber px-1 text-[10px] font-bold text-ink-950">
+                <span className="absolute -left-0.5 -top-0.5 grid h-5 min-w-[20px] place-items-center rounded-full bg-brand-amber px-1 text-[10px] font-bold text-ink-950">
                   {count}
                 </span>
               )}
@@ -115,7 +119,7 @@ export function Header() {
             <button
               onClick={() => setOpen((v) => !v)}
               className="tap rounded-lg p-2 text-slate-300 transition hover:bg-white/10 hover:text-white md:hidden"
-              aria-label="Toggle menu"
+              aria-label="باز/بسته کردن منو"
               aria-expanded={open}
             >
               {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -123,7 +127,7 @@ export function Header() {
           </div>
         </div>
 
-        {/* Mobile menu */}
+        {/* منوی موبایل */}
         {open && (
           <div className="animate-fade-in border-t border-white/10 bg-ink-950 md:hidden">
             <nav className="container-page flex flex-col py-2">

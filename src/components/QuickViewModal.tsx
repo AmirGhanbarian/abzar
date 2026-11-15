@@ -5,6 +5,12 @@ import { formatPrice } from '../data/products'
 import { useCart } from '../hooks/useCart'
 import { Rating } from './Rating'
 
+const badgeLabel: Record<NonNullable<Product['badge']>, string> = {
+  new: 'جدید',
+  sale: 'تخفیف',
+  bestseller: 'پرفروش',
+}
+
 interface Props {
   product: Product | null
   onClose: () => void
@@ -55,17 +61,17 @@ export function QuickViewModal({ product, onClose }: Props) {
             className="h-full w-full object-cover"
           />
           {product.badge && (
-            <span className="absolute left-4 top-4 rounded-md bg-brand-amber px-2 py-0.5 text-[10px] font-bold uppercase text-ink-950">
-              {product.badge}
+            <span className="absolute start-4 top-4 rounded-md bg-brand-amber px-2 py-0.5 text-[10px] font-bold text-ink-950">
+              {badgeLabel[product.badge]}
             </span>
           )}
         </div>
 
-        {/* Details */}
+        {/* جزئیات */}
         <div className="flex flex-1 flex-col overflow-y-auto p-6 sm:p-8">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <div className="text-xs font-semibold uppercase tracking-wide text-brand-amber">
+              <div className="text-xs font-semibold text-brand-amber">
                 {product.brand}
               </div>
               <h2 className="mt-1 font-display text-2xl font-bold leading-tight text-white">
@@ -75,7 +81,7 @@ export function QuickViewModal({ product, onClose }: Props) {
             <button
               onClick={onClose}
               className="tap grid place-items-center rounded-lg text-slate-400 transition hover:bg-white/10 hover:text-white"
-              aria-label="Close quick view"
+              aria-label="بستن نمایش سریع"
             >
               <X className="h-5 w-5" />
             </button>
@@ -95,7 +101,7 @@ export function QuickViewModal({ product, onClose }: Props) {
                   {formatPrice(product.compareAtPrice!)}
                 </span>
                 <span className="rounded bg-rose-500/15 px-2 py-0.5 text-xs font-bold text-rose-400">
-                  Save {pct}%
+                  {pct}٪ تخفیف
                 </span>
               </>
             )}
@@ -105,10 +111,10 @@ export function QuickViewModal({ product, onClose }: Props) {
             {product.description}
           </p>
 
-          {/* Specs */}
+          {/* مشخصات */}
           <div className="mt-6">
-            <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-white">
-              Specifications
+            <h3 className="font-display text-sm font-semibold text-white">
+              مشخصات
             </h3>
             <dl className="mt-3 grid grid-cols-1 gap-x-6 sm:grid-cols-2">
               {product.specs.map((s) => (
@@ -117,7 +123,7 @@ export function QuickViewModal({ product, onClose }: Props) {
                   className="flex justify-between gap-2 border-b border-white/5 py-1.5 text-sm"
                 >
                   <dt className="text-slate-400">{s.label}</dt>
-                  <dd className="text-right font-medium text-slate-200">
+                  <dd className="text-start font-medium text-slate-200">
                     {s.value}
                   </dd>
                 </div>
@@ -125,15 +131,15 @@ export function QuickViewModal({ product, onClose }: Props) {
             </dl>
           </div>
 
-          {/* Qty + add */}
+          {/* تعداد + افزودن */}
           <div className="mt-auto pt-6">
             {product.inStock ? (
               <div className="flex items-center gap-2 text-xs text-emerald-400">
-                <Check className="h-4 w-4" /> In stock — ships in 1 business day
+                <Check className="h-4 w-4" /> موجود — ارسال در ۱ روز کاری
               </div>
             ) : (
               <div className="text-xs text-rose-400">
-                Out of stock — expected back in 2 weeks
+                ناموجود — بازگشت حدودی در ۲ هفته
               </div>
             )}
 
@@ -142,7 +148,7 @@ export function QuickViewModal({ product, onClose }: Props) {
                 <button
                   onClick={() => setQty((q) => Math.max(1, q - 1))}
                   className="tap grid place-items-center px-3 text-slate-300 transition hover:text-white"
-                  aria-label="Decrease quantity"
+                  aria-label="کاهش تعداد"
                 >
                   <Minus className="h-4 w-4" />
                 </button>
@@ -152,7 +158,7 @@ export function QuickViewModal({ product, onClose }: Props) {
                 <button
                   onClick={() => setQty((q) => q + 1)}
                   className="tap grid place-items-center px-3 text-slate-300 transition hover:text-white"
-                  aria-label="Increase quantity"
+                  aria-label="افزایش تعداد"
                 >
                   <Plus className="h-4 w-4" />
                 </button>
@@ -167,7 +173,7 @@ export function QuickViewModal({ product, onClose }: Props) {
                 className="btn-primary flex-1"
               >
                 <ShoppingBag className="h-4 w-4" />
-                Add to cart · {formatPrice(product.price * qty)}
+                افزودن به سبد · {formatPrice(product.price * qty)}
               </button>
             </div>
           </div>

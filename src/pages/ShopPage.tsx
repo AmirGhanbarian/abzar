@@ -14,11 +14,11 @@ const isCategoryId = (v: string | null): v is CategoryId =>
   !!v && categories.some((c) => c.id === v)
 
 /**
- * The shop page. All filter state lives in the URL query string
- * (?category=&q=&deal=&focus=) so views are shareable and the search overlay /
- * home page can deep-link here. Category and deal changes push a new history
- * entry; the search box updates the `q` param (debounced, replace) so typing
- * doesn't spam back-button history.
+ * صفحه فروشگاه. کل وضعیت فیلترها در رشته‌پرسوجوی URL قرار دارد
+ * (?category=&q=&deal=&focus=) تا نماهایی قابل‌اشتراک باشند و پنل جستجو /
+ * صفحه اصلی بتوانند به اینجا پیوند عمیق بزنند. تغییر دسته و تخفیف یک ورودی
+ * تاریخچه جدید ثبت می‌کند؛ جعبه جستجو پارامتر q را (با تأخیر و replace) به‌روز
+ * می‌کند تا تایپ، تاریخچه دکمه-back را پر نکند.
  */
 export function ShopPage() {
   const [params, setParams] = useSearchParams()
@@ -105,53 +105,54 @@ export function ShopPage() {
 
   const heading =
     category !== 'all'
-      ? (categories.find((c) => c.id === category)?.name ?? 'Shop')
+      ? (categories.find((c) => c.id === category)?.name ?? 'فروشگاه')
       : deal
-        ? 'Deals'
-        : 'All tools'
+        ? 'تخفیف‌ها'
+        : 'همه ابزارها'
 
   return (
     <>
-      {/* Page header */}
+      {/* سربرگ صفحه */}
       <section className="border-b border-white/10 bg-ink-900/40">
         <div className="container-page py-10 sm:py-14">
-          <span className="eyebrow">Shop</span>
+          <span className="eyebrow">فروشگاه</span>
           <h1 className="mt-4 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
             {heading}
           </h1>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-400">
-            Every Abzar tool ships brushless with a 3-year warranty. Filter by
-            trade, search by name or spec, or browse the full range.
+            هر ابزار ابزار براشلس با گارانتی ۳ ساله ارسال می‌شود. بر اساس کاربری
+            فیلتر کنید، بر اساس نام یا مشخصات جستجو کنید، یا کل диапазون را مرور
+            کنید.
           </p>
         </div>
       </section>
 
       <section className="container-page py-10 sm:py-14">
-        {/* Controls */}
+        {/* کنترل‌ها */}
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-            {/* Search box */}
+            {/* جعبه جستجو */}
             <div className="relative flex-1">
-              <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+              <Search className="pointer-events-none absolute start-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
               <input
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search by name, brand, or spec…"
-                className="h-11 w-full rounded-xl border border-white/10 bg-white/5 pl-9 pr-9 text-sm text-white placeholder:text-slate-500 focus:border-brand-amber/50 focus:outline-none"
-                aria-label="Search products"
+                placeholder="جستجو بر اساس نام، برند یا مشخصات…"
+                className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-9 text-sm text-white placeholder:text-slate-500 focus:border-brand-amber/50 focus:outline-none"
+                aria-label="جستجوی محصولات"
               />
               {query && (
                 <button
                   onClick={() => setQuery('')}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-1 text-slate-400 transition hover:text-white"
-                  aria-label="Clear search"
+                  className="absolute end-2 top-1/2 -translate-y-1/2 rounded p-1 text-slate-400 transition hover:text-white"
+                  aria-label="پاک کردن جستجو"
                 >
                   <X className="h-4 w-4" />
                 </button>
               )}
             </div>
 
-            {/* Deals toggle */}
+            {/* کلید تخفیف‌ها */}
             <button
               onClick={toggleDeal}
               className={`inline-flex items-center justify-center gap-2 rounded-xl border px-4 py-2.5 text-sm font-medium transition ${
@@ -162,14 +163,14 @@ export function ShopPage() {
               aria-pressed={deal}
             >
               <SlidersHorizontal className="h-4 w-4" />
-              Deals only
+              فقط تخفیف‌دار
             </button>
           </div>
 
-          {/* Category chips */}
+          {/* چیپ‌های دسته */}
           <div className="no-scrollbar flex gap-2 overflow-x-auto pb-1">
             <Chip active={category === 'all'} onClick={() => setCategory('all')}>
-              All ({products.length})
+              همه ({products.length})
             </Chip>
             {availableCategories.map((c) => (
               <Chip
@@ -183,14 +184,14 @@ export function ShopPage() {
           </div>
         </div>
 
-        {/* Result meta + clear */}
+        {/* متای نتایج + پاک‌کردن */}
         <div className="mt-8 flex items-center justify-between gap-4">
           <p className="text-sm text-slate-400">
-            {filtered.length} {filtered.length === 1 ? 'tool' : 'tools'}
+            {filtered.length} محصول
             {query.trim() && (
               <>
                 {' '}
-                for <span className="text-white">“{query.trim()}”</span>
+                برای <span className="text-white">«{query.trim()}»</span>
               </>
             )}
           </p>
@@ -199,12 +200,12 @@ export function ShopPage() {
               onClick={clearAll}
               className="text-sm font-medium text-brand-amber transition hover:text-brand-amber-light"
             >
-              Clear filters
+              پاک کردن فیلترها
             </button>
           )}
         </div>
 
-        {/* Grid */}
+        {/* شبکه */}
         {filtered.length > 0 ? (
           <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:grid-cols-4">
             {filtered.map((p) => (
@@ -213,9 +214,9 @@ export function ShopPage() {
           </div>
         ) : (
           <div className="mt-6 rounded-2xl border border-white/10 bg-ink-850/60 p-12 text-center">
-            <p className="text-slate-300">No tools match your filters.</p>
+            <p className="text-slate-300">ابزاری مطابق فیلترهای شما یافت نشد.</p>
             <button onClick={clearAll} className="btn-primary mt-4">
-              Reset and show all
+              بازنشانی و نمایش همه
             </button>
           </div>
         )}

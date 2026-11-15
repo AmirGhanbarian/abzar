@@ -1,15 +1,15 @@
-import { ArrowRight, Check, ShoppingBag } from 'lucide-react'
+import { ArrowLeft, Check, ShoppingBag } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { products, formatPrice } from '../data/products'
 import { useCart } from '../hooks/useCart'
 import { Rating } from './Rating'
 
 const features = [
-  'X1 drill + T18 impact driver',
-  '7-1/4" circular saw + reciprocating saw',
-  'Oscillating multi-tool + LED area light',
-  'Two 4.0Ah batteries + rapid charger',
-  'Rolling kit bag, ready for the truck bed',
+  'دریل X1 و پیچ‌گوشتی ضربه‌ای T18',
+  'اره گرد ۷-۱/۴ اینچ + اره متقابل',
+  'ابزار چندکاره نوسانی + چراغ منطقه‌ای LED',
+  'دو باتری ۴.۰ آمپری + شارژر سریع',
+  'کیف چرخ‌دار آماده برای بستر کامیون',
 ]
 
 export function FeaturedBanner() {
@@ -24,9 +24,9 @@ export function FeaturedBanner() {
   return (
     <section id="deals" className="container-page py-14 sm:py-20">
       <div className="grid overflow-hidden rounded-3xl border border-white/10 bg-ink-850 lg:grid-cols-2">
-        {/* Text */}
+        {/* متن */}
         <div className="flex flex-col justify-center p-8 sm:p-12">
-          <span className="eyebrow">Deal of the week</span>
+          <span className="eyebrow">تخفیف هفته</span>
           <h2 className="mt-4 font-display text-3xl font-bold leading-tight tracking-tight text-white sm:text-4xl">
             {combo.name}
           </h2>
@@ -44,7 +44,7 @@ export function FeaturedBanner() {
                   {formatPrice(combo.compareAtPrice!)}
                 </span>
                 <span className="rounded bg-rose-500/15 px-2 py-1 text-sm font-bold text-rose-400">
-                  Save {pct}%
+                  {pct}٪ تخفیف
                 </span>
               </>
             )}
@@ -66,16 +66,16 @@ export function FeaturedBanner() {
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <button onClick={() => addItem(combo)} className="btn-primary">
               <ShoppingBag className="h-4 w-4" />
-              Add kit to cart
+              افزودن ست به سبد
             </button>
             <Link to="/shop" className="btn-secondary">
-              Browse all tools
-              <ArrowRight className="h-4 w-4" />
+              مشاهده همه ابزارها
+              <ArrowLeft className="h-4 w-4" />
             </Link>
           </div>
         </div>
 
-        {/* Image */}
+        {/* تصویر */}
         <div className="relative min-h-[280px] overflow-hidden bg-ink-900 lg:min-h-full">
           <img
             src={combo.image}
@@ -83,7 +83,7 @@ export function FeaturedBanner() {
             className="h-full w-full object-cover"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-ink-850/80 via-transparent to-transparent lg:bg-gradient-to-l lg:from-ink-850/80" />
+          <div className="absolute inset-0 bg-gradient-to-t from-ink-850/80 via-transparent to-transparent lg:bg-gradient-to-r lg:from-ink-850/80" />
         </div>
       </div>
     </section>

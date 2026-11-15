@@ -13,8 +13,8 @@ const iconMap: Record<string, LucideIcon> = {
 }
 
 /**
- * "Shop by trade" section on the home page. Each card deep-links into the shop
- * filtered by that category (/shop?category=<id>).
+ * بخش «خرید بر اساس کاربری» در صفحه اصلی. هر کارت به فروشگاه فیلتر‌شده بر اساس
+ * آن دسته پیوند عمیق می‌دهد (/shop?category=<id>).
  */
 export function CategoryStrip() {
   const countFor = (id: string) =>
@@ -24,16 +24,16 @@ export function CategoryStrip() {
     <section id="categories" className="container-page py-14 sm:py-20">
       <div className="flex items-end justify-between gap-4">
         <div>
-          <span className="eyebrow">Shop by trade</span>
+          <span className="eyebrow">خرید بر اساس کاربری</span>
           <h2 className="mt-4 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Find your category
+            دسته‌بندی خود را پیدا کنید
           </h2>
         </div>
         <Link
           to="/shop"
           className="hidden text-sm font-medium text-brand-amber transition hover:text-brand-amber-light sm:inline"
         >
-          View all →
+          همه ←
         </Link>
       </div>
 
@@ -45,7 +45,7 @@ export function CategoryStrip() {
             <Link
               key={c.id}
               to={`/shop?category=${c.id}`}
-              className="group flex w-40 shrink-0 flex-col items-start gap-3 rounded-2xl border border-white/10 bg-ink-850/60 p-5 text-left transition hover:border-brand-amber/40 hover:bg-brand-amber/5 sm:w-auto"
+              className="group flex w-40 shrink-0 flex-col items-start gap-3 rounded-2xl border border-white/10 bg-ink-850/60 p-5 text-start transition hover:border-brand-amber/40 hover:bg-brand-amber/5 sm:w-auto"
             >
               <span className="grid h-12 w-12 place-items-center rounded-xl bg-white/5 text-brand-amber transition group-hover:bg-brand-amber group-hover:text-ink-950">
                 <Icon className="h-6 w-6" />
@@ -56,9 +56,7 @@ export function CategoryStrip() {
                 </div>
                 <div className="text-xs text-slate-400">{c.tagline}</div>
               </div>
-              <div className="text-xs text-slate-500">
-                {n} {n === 1 ? 'tool' : 'tools'}
-              </div>
+              <div className="text-xs text-slate-500">{n} محصول</div>
             </Link>
           )
         })}

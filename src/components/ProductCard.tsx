@@ -10,9 +10,9 @@ const badgeStyle: Record<NonNullable<Product['badge']>, string> = {
   bestseller: 'bg-brand-amber text-ink-950',
 }
 const badgeLabel: Record<NonNullable<Product['badge']>, string> = {
-  new: 'New',
-  sale: 'Sale',
-  bestseller: 'Bestseller',
+  new: 'جدید',
+  sale: 'تخفیف',
+  bestseller: 'پرفروش',
 }
 
 interface Props {
@@ -38,25 +38,25 @@ export function ProductCard({ product, onQuickView }: Props) {
           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
         />
 
-        <div className="absolute left-3 top-3 flex flex-col gap-1.5">
+        <div className="absolute start-3 top-3 flex flex-col gap-1.5">
           {product.badge && (
             <span
-              className={`rounded-md px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${badgeStyle[product.badge]}`}
+              className={`rounded-md px-2 py-0.5 text-[10px] font-bold ${badgeStyle[product.badge]}`}
             >
               {badgeLabel[product.badge]}
             </span>
           )}
           {onSale && (
             <span className="rounded-md bg-rose-500 px-2 py-0.5 text-[10px] font-bold text-white">
-              −{pct}%
+              {pct}٪ تخفیف
             </span>
           )}
         </div>
 
         <button
           onClick={() => onQuickView(product)}
-          className="tap absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-lg bg-ink-950/70 text-white backdrop-blur transition hover:bg-brand-amber hover:text-ink-950"
-          aria-label={`Quick view ${product.name}`}
+          className="tap absolute end-3 top-3 grid h-9 w-9 place-items-center rounded-lg bg-ink-950/70 text-white backdrop-blur transition hover:bg-brand-amber hover:text-ink-950"
+          aria-label={`نمایش سریع ${product.name}`}
         >
           <Eye className="h-4 w-4" />
         </button>
@@ -64,21 +64,21 @@ export function ProductCard({ product, onQuickView }: Props) {
         {!product.inStock && (
           <div className="absolute inset-0 grid place-items-center bg-ink-950/60 backdrop-blur-[1px]">
             <span className="rounded-lg border border-white/20 bg-ink-950/80 px-4 py-2 text-sm font-semibold text-white">
-              Sold out
+              ناموجود
             </span>
           </div>
         )}
       </div>
 
-      {/* Body */}
+      {/* بدنه */}
       <div className="flex flex-1 flex-col p-4">
-        <div className="text-xs font-semibold uppercase tracking-wide text-brand-amber">
+        <div className="text-xs font-semibold text-brand-amber">
           {product.brand}
         </div>
         <button
           onClick={() => onQuickView(product)}
-          className="mt-1 text-left"
-          aria-label={`Quick view ${product.name}`}
+          className="mt-1 text-start"
+          aria-label={`نمایش سریع ${product.name}`}
         >
           <h3 className="font-display text-[15px] font-semibold leading-snug text-white transition hover:text-brand-amber-light">
             {product.name}
@@ -111,7 +111,7 @@ export function ProductCard({ product, onQuickView }: Props) {
             className="btn-primary w-full disabled:cursor-not-allowed"
           >
             <Plus className="h-4 w-4" />
-            {product.inStock ? 'Add to cart' : 'Sold out'}
+            {product.inStock ? 'افزودن به سبد' : 'ناموجود'}
           </button>
         </div>
       </div>

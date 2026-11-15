@@ -5,45 +5,45 @@ type FooterLink = { label: string; to?: string }
 
 const columns: { title: string; links: FooterLink[] }[] = [
   {
-    title: 'Shop',
+    title: 'فروشگاه',
     links: [
-      { label: 'Drills & Drivers', to: '/shop?category=drills' },
-      { label: 'Saws', to: '/shop?category=saws' },
-      { label: 'Grinders', to: '/shop?category=grinders' },
-      { label: 'Sanders', to: '/shop?category=sanders' },
-      { label: 'Combo Kits', to: '/shop?category=combo' },
-      { label: 'Gift cards', to: '/shop' },
+      { label: 'دریل و پیچ‌گوشتی', to: '/shop?category=drills' },
+      { label: 'اره‌ها', to: '/shop?category=saws' },
+      { label: 'سنگ‌فرزینه', to: '/shop?category=grinders' },
+      { label: 'سمباده', to: '/shop?category=sanders' },
+      { label: 'ست‌های کامل', to: '/shop?category=combo' },
+      { label: 'کارت هدیه', to: '/shop' },
     ],
   },
   {
-    title: 'Support',
+    title: 'پشتیبانی',
     links: [
-      { label: 'Track order' },
-      { label: 'Warranty claims' },
-      { label: 'Repair service' },
-      { label: 'Parts diagrams' },
-      { label: 'Contact us' },
-      { label: 'FAQ' },
+      { label: 'پیگیری سفارش' },
+      { label: 'ادعای گارانتی' },
+      { label: 'سرویس تعمیر' },
+      { label: 'نقشه قطعات' },
+      { label: 'تماس با ما' },
+      { label: 'سوالات متداول' },
     ],
   },
   {
-    title: 'Company',
+    title: 'شرکت',
     links: [
-      { label: 'About Abzar' },
-      { label: 'Pro program' },
-      { label: 'Trade accounts' },
-      { label: 'Careers' },
-      { label: 'Press' },
-      { label: 'Sustainability' },
+      { label: 'درباره ابزار' },
+      { label: 'برنامه حرفه‌ای' },
+      { label: 'حساب‌های تجاری' },
+      { label: 'فرصت‌های شغلی' },
+      { label: 'مطبوعات' },
+      { label: 'پایداری' },
     ],
   },
 ]
 
 const social = [
-  { icon: Instagram, label: 'Instagram' },
-  { icon: Twitter, label: 'Twitter' },
-  { icon: Facebook, label: 'Facebook' },
-  { icon: Youtube, label: 'YouTube' },
+  { icon: Instagram, label: 'اینستاگرام' },
+  { icon: Twitter, label: 'توییتر' },
+  { icon: Facebook, label: 'فیسبوک' },
+  { icon: Youtube, label: 'یوتیوب' },
 ]
 
 export function Footer() {
@@ -51,7 +51,7 @@ export function Footer() {
     <footer className="border-t border-white/10 bg-ink-950">
       <div className="container-page py-14">
         <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
-          {/* Brand */}
+          {/* برند */}
           <div className="max-w-sm">
             <Link to="/" className="flex items-center gap-2">
               <span className="grid h-9 w-9 place-items-center rounded-lg bg-brand-amber text-ink-950">
@@ -62,8 +62,8 @@ export function Footer() {
               </span>
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-slate-400">
-              Pro-grade power tools built for the jobsite. Designed, tested, and
-              warrantied for the people who make their living with their hands.
+              ابزارهای برقی حرفه‌ای ساخته‌شده برای کارگاه. طراحی، آزمایش و
+              گارانتی برای کسانی که با دست‌هایشان امرار معاش می‌کنند.
             </p>
             <div className="mt-5 flex items-center gap-2">
               {social.map((s) => (
@@ -79,10 +79,10 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Link columns */}
+          {/* ستون‌های پیوند */}
           {columns.map((col) => (
             <div key={col.title}>
-              <h3 className="font-display text-sm font-semibold uppercase tracking-wider text-white">
+              <h3 className="font-display text-sm font-semibold text-white">
                 {col.title}
               </h3>
               <ul className="mt-4 space-y-2.5">
@@ -110,25 +110,25 @@ export function Footer() {
           ))}
         </div>
 
-        {/* Contact row */}
+        {/* ردیف تماس */}
         <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-2 text-sm text-slate-400">
             <Phone className="h-4 w-4 text-brand-amber" />
-            <span>1-800-ABZAR-PRO · Mon–Sat 7am–8pm CT</span>
+            <span>۰۲۱-۱۲۳۴۵۶۷۸ · شنبه تا پنجشنبه ۷ تا ۲۰</span>
           </div>
           <div className="flex items-center gap-2 text-slate-500">
             <CreditCard className="h-5 w-5" />
-            <span className="text-xs uppercase tracking-wide">Visa · Mastercard · Amex · PayPal · Apple Pay</span>
+            <span className="text-xs">ویزا · مسترکارت · آمکس · پی‌پال · اپل‌پی</span>
           </div>
         </div>
 
-        {/* Legal */}
+        {/* حقوقی */}
         <div className="mt-8 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Abzar Tools, Inc. All rights reserved.</p>
+          <p>© {new Date().getFullYear().toLocaleString('fa-IR')} ابزار. همه حقوق محفوظ است.</p>
           <div className="flex gap-4">
-            <a href="#" className="hover:text-slate-300">Privacy</a>
-            <a href="#" className="hover:text-slate-300">Terms</a>
-            <a href="#" className="hover:text-slate-300">Accessibility</a>
+            <a href="#" className="hover:text-slate-300">حریم خصوصی</a>
+            <a href="#" className="hover:text-slate-300">قوانین</a>
+            <a href="#" className="hover:text-slate-300">دسترس‌پذیری</a>
           </div>
         </div>
       </div>

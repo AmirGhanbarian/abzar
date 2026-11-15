@@ -16,6 +16,22 @@
     background-attachment: fixed;
   }
 
+  /* Persian/Arabic script must not be letter-spaced — tracking utilities
+     (tracking-tight, tracking-wide, tracking-[..]) disconnect the joined
+     letters. Neutralize them in RTL so headings and labels render correctly. */
+  [dir="rtl"] *,
+  [dir="rtl"] .tracking-tight,
+  [dir="rtl"] .tracking-wider,
+  [dir="rtl"] .tracking-wide,
+  [dir="rtl"] .tracking-normal {
+    letter-spacing: 0 !important;
+  }
+
+  /* `uppercase` has no effect on Persian, but keep word-spacing neutral too. */
+  [dir="rtl"] .uppercase {
+    text-transform: none;
+  }
+
   ::selection {
     @apply bg-brand-amber/30 text-white;
   }

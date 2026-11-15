@@ -20,8 +20,8 @@ export function Rating({ rating, reviews, size = 'sm' }: RatingProps) {
         ))}
       </div>
       <span className="text-xs text-slate-400">
-        {rating.toFixed(1)}
-        {reviews !== undefined && ` · ${reviews.toLocaleString()}`}
+        {rating.toLocaleString('fa-IR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}
+        {reviews !== undefined && ` · ${reviews.toLocaleString('fa-IR')}`}
       </span>
     </div>
   )
