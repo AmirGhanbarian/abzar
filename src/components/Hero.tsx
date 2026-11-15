@@ -1,4 +1,5 @@
 import { ArrowRight, RotateCcw, ShieldCheck, Truck, Zap } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { heroImage } from '../data/products'
 
 const trust = [
@@ -41,13 +42,13 @@ export function Hero() {
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <a href="#shop" className="btn-primary">
+            <Link to="/shop" className="btn-primary">
               Shop the lineup
               <ArrowRight className="h-4 w-4" />
-            </a>
-            <a href="#deals" className="btn-secondary">
+            </Link>
+            <Link to="/shop?deal=1" className="btn-secondary">
               Today's deals
-            </a>
+            </Link>
           </div>
 
           <div className="mt-10 grid max-w-md grid-cols-3 gap-3">

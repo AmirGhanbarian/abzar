@@ -1,4 +1,5 @@
 import { ArrowRight, Check, ShoppingBag } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { products, formatPrice } from '../data/products'
 import { useCart } from '../hooks/useCart'
 import { Rating } from './Rating'
@@ -67,10 +68,10 @@ export function FeaturedBanner() {
               <ShoppingBag className="h-4 w-4" />
               Add kit to cart
             </button>
-            <a href="#shop" className="btn-secondary">
+            <Link to="/shop" className="btn-secondary">
               Browse all tools
               <ArrowRight className="h-4 w-4" />
-            </a>
+            </Link>
           </div>
         </div>
 

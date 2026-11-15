@@ -1,7 +1,7 @@
 import { Disc3, Package, Scissors, Settings2, Wind, Zap, type LucideIcon } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { categories } from '../data/categories'
 import { products } from '../data/products'
-import type { CategoryId } from '../types'
 
 const iconMap: Record<string, LucideIcon> = {
   Zap,
@@ -12,13 +12,12 @@ const iconMap: Record<string, LucideIcon> = {
   Package,
 }
 
-interface Props {
-  active: CategoryId | 'all'
-  onSelect: (id: CategoryId | 'all') => void
-}
-
-export function CategoryStrip({ active, onSelect }: Props) {
-  const countFor = (id: CategoryId) =>
+/**
+ * "Shop by trade" section on the home page. Each card deep-links into the shop
+ * filtered by that category (/shop?category=<id>).
+ */
+export function CategoryStrip() {
+  const countFor = (id: string) =>
     products.filter((p) => p.category === id).length
 
   return (
@@ -30,36 +29,25 @@ export function CategoryStrip({ active, onSelect }: Props) {
             Find your category
           </h2>
         </div>
-        <a
-          href="#shop"
+        <Link
+          to="/shop"
           className="hidden text-sm font-medium text-brand-amber transition hover:text-brand-amber-light sm:inline"
         >
           View all →
-        </a>
+        </Link>
       </div>
 
       <div className="no-scrollbar mt-8 flex gap-4 overflow-x-auto pb-2 sm:grid sm:grid-cols-3 sm:overflow-visible lg:grid-cols-6">
         {categories.map((c) => {
           const Icon = iconMap[c.icon] ?? Zap
-          const isActive = active === c.id
           const n = countFor(c.id)
           return (
-            <button
+            <Link
               key={c.id}
-              onClick={() => onSelect(c.id)}
-              className={`group flex w-40 shrink-0 flex-col items-start gap-3 rounded-2xl border p-5 text-left transition sm:w-auto ${
-                isActive
-                  ? 'border-brand-amber bg-brand-amber/10'
-                  : 'border-white/10 bg-ink-850/60 hover:border-white/20'
-              }`}
+              to={`/shop?category=${c.id}`}
+              className="group flex w-40 shrink-0 flex-col items-start gap-3 rounded-2xl border border-white/10 bg-ink-850/60 p-5 text-left transition hover:border-brand-amber/40 hover:bg-brand-amber/5 sm:w-auto"
             >
-              <span
-                className={`grid h-12 w-12 place-items-center rounded-xl transition ${
-                  isActive
-                    ? 'bg-brand-amber text-ink-950'
-                    : 'bg-white/5 text-brand-amber group-hover:bg-brand-amber/15'
-                }`}
-              >
+              <span className="grid h-12 w-12 place-items-center rounded-xl bg-white/5 text-brand-amber transition group-hover:bg-brand-amber group-hover:text-ink-950">
                 <Icon className="h-6 w-6" />
               </span>
               <div>
@@ -71,7 +59,7 @@ export function CategoryStrip({ active, onSelect }: Props) {
               <div className="text-xs text-slate-500">
                 {n} {n === 1 ? 'tool' : 'tools'}
               </div>
-            </button>
+            </Link>
           )
         })}
       </div>

@@ -1,17 +1,41 @@
 import { CreditCard, Facebook, Instagram, Phone, Twitter, Youtube, Zap } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
-const columns = [
+type FooterLink = { label: string; to?: string }
+
+const columns: { title: string; links: FooterLink[] }[] = [
   {
     title: 'Shop',
-    links: ['Drills & Drivers', 'Saws', 'Grinders', 'Sanders', 'Combo Kits', 'Gift cards'],
+    links: [
+      { label: 'Drills & Drivers', to: '/shop?category=drills' },
+      { label: 'Saws', to: '/shop?category=saws' },
+      { label: 'Grinders', to: '/shop?category=grinders' },
+      { label: 'Sanders', to: '/shop?category=sanders' },
+      { label: 'Combo Kits', to: '/shop?category=combo' },
+      { label: 'Gift cards', to: '/shop' },
+    ],
   },
   {
     title: 'Support',
-    links: ['Track order', 'Warranty claims', 'Repair service', 'Parts diagrams', 'Contact us', 'FAQ'],
+    links: [
+      { label: 'Track order' },
+      { label: 'Warranty claims' },
+      { label: 'Repair service' },
+      { label: 'Parts diagrams' },
+      { label: 'Contact us' },
+      { label: 'FAQ' },
+    ],
   },
   {
     title: 'Company',
-    links: ['About Abzar', 'Pro program', 'Trade accounts', 'Careers', 'Press', 'Sustainability'],
+    links: [
+      { label: 'About Abzar' },
+      { label: 'Pro program' },
+      { label: 'Trade accounts' },
+      { label: 'Careers' },
+      { label: 'Press' },
+      { label: 'Sustainability' },
+    ],
   },
 ]
 
@@ -29,14 +53,14 @@ export function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div className="max-w-sm">
-            <a href="#top" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <span className="grid h-9 w-9 place-items-center rounded-lg bg-brand-amber text-ink-950">
                 <Zap className="h-5 w-5" fill="currentColor" />
               </span>
               <span className="font-display text-xl font-bold tracking-tight text-white">
                 ABZAR
               </span>
-            </a>
+            </Link>
             <p className="mt-4 text-sm leading-relaxed text-slate-400">
               Pro-grade power tools built for the jobsite. Designed, tested, and
               warrantied for the people who make their living with their hands.
@@ -45,7 +69,7 @@ export function Footer() {
               {social.map((s) => (
                 <a
                   key={s.label}
-                  href="#top"
+                  href="#"
                   aria-label={s.label}
                   className="tap grid place-items-center rounded-lg border border-white/10 p-2 text-slate-400 transition hover:border-brand-amber/40 hover:text-brand-amber"
                 >
@@ -63,13 +87,22 @@ export function Footer() {
               </h3>
               <ul className="mt-4 space-y-2.5">
                 {col.links.map((l) => (
-                  <li key={l}>
-                    <a
-                      href="#shop"
-                      className="text-sm text-slate-400 transition hover:text-brand-amber"
-                    >
-                      {l}
-                    </a>
+                  <li key={l.label}>
+                    {l.to ? (
+                      <Link
+                        to={l.to}
+                        className="text-sm text-slate-400 transition hover:text-brand-amber"
+                      >
+                        {l.label}
+                      </Link>
+                    ) : (
+                      <a
+                        href="#"
+                        className="text-sm text-slate-400 transition hover:text-brand-amber"
+                      >
+                        {l.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -93,9 +126,9 @@ export function Footer() {
         <div className="mt-8 flex flex-col gap-2 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Abzar Tools, Inc. All rights reserved.</p>
           <div className="flex gap-4">
-            <a href="#top" className="hover:text-slate-300">Privacy</a>
-            <a href="#top" className="hover:text-slate-300">Terms</a>
-            <a href="#top" className="hover:text-slate-300">Accessibility</a>
+            <a href="#" className="hover:text-slate-300">Privacy</a>
+            <a href="#" className="hover:text-slate-300">Terms</a>
+            <a href="#" className="hover:text-slate-300">Accessibility</a>
           </div>
         </div>
       </div>

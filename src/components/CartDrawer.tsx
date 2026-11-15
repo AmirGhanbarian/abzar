@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { ArrowRight, Minus, Plus, ShoppingBag, Trash2, Truck, X } from 'lucide-react'
 import { useCart } from '../hooks/useCart'
 import { formatPrice } from '../data/products'
@@ -8,6 +9,7 @@ const FREE_SHIPPING_THRESHOLD = 99
 export function CartDrawer() {
   const { items, isOpen, closeCart, setQty, removeItem, subtotal, count } =
     useCart()
+  const navigate = useNavigate()
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : ''
@@ -69,7 +71,13 @@ export function CartDrawer() {
                 Browse the lineup and add your first tool.
               </p>
             </div>
-            <button onClick={closeCart} className="btn-primary">
+            <button
+              onClick={() => {
+                closeCart()
+                navigate('/shop')
+              }}
+              className="btn-primary"
+            >
               Shop tools
             </button>
           </div>
