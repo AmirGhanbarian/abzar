@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-ink-950 font-sans text-slate-300 antialiased;
+    background-image:
+      radial-gradient(60rem 60rem at 80% -10%, rgba(245, 158, 11, 0.08), transparent 60%),
+      radial-gradient(50rem 50rem at -10% 10%, rgba(56, 189, 248, 0.05), transparent 55%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    @apply bg-brand-amber/30 text-white;
+  }
+
+  /* Hide scrollbars on horizontal scroll strips while keeping scroll. */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Respect reduced-motion preferences. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Page width container with responsive gutters. */
+  .container-page {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Primary amber CTA. */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-brand-amber px-5 py-3 text-sm font-semibold text-ink-950 shadow-[0_8px_24px_-10px_rgba(245,158,11,0.7)] transition hover:bg-brand-amber-light hover:shadow-[0_10px_30px_-8px_rgba(245,158,11,0.85)] active:scale-[0.98] disabled:opacity-50;
+  }
+
+  /* Secondary outline button. */
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white backdrop-blur transition hover:border-white/30 hover:bg-white/10 active:scale-[0.98];
+  }
+
+  /* Surface card. */
+  .card {
+    @apply rounded-2xl border border-white/[0.06] bg-ink-850/80 shadow-card;
+  }
+
+  /* Eyebrow / kicker label. */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-amber/30 bg-brand-amber/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-amber-light;
+  }
+
+  /* Tap target sizing for mobile. */
+  .tap {
+    @apply min-h-[44px] min-w-[44px];
+  }
+}
